@@ -31,6 +31,10 @@ void ABattlePlayerController::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
+	OnLeftClick.AddDynamic(this, &ABattlePlayerController::Test);
+
+	UE_LOG(LogTemp, Log, TEXT("Added truc"));
+
 	//Add Input Mapping Context
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
@@ -50,5 +54,14 @@ void ABattlePlayerController::OnInputTriggered()
 
 void ABattlePlayerController::OnInputReleased()
 {
-	UE_LOG(LogTemp, Log, TEXT("Input completed"));
+	float mouseX;
+	float mouseY;
+	GetMousePosition(mouseX,mouseY);
+	OnLeftClick.Broadcast(mouseX,mouseY);
+	UE_LOG(LogTemp, Log, TEXT("Input Completed"));
+}
+
+void ABattlePlayerController::Test(float x, float y)
+{
+	UE_LOG(LogTemp, Log, TEXT("Testting %f %f"),x,y);
 }

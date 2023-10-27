@@ -10,6 +10,11 @@
 /**
  * 
  */
+
+class TACTICSUE_API ABattlePlayerController;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FMousePosition,float,mouseX,float,mouseY);
+
 UCLASS()
 class TACTICSUE_API ABattlePlayerController : public APlayerController
 {
@@ -28,6 +33,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	class UInputAction* ClickAction;
+
+	FMousePosition OnLeftClick;
 
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
@@ -48,4 +55,6 @@ private:
 
 	bool bIsTouch; // Is it a touch device
 	float FollowTime; // For how long it has been pressed
+
+	void Test(float x,float y);
 };
