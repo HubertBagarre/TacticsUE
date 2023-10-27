@@ -33,7 +33,7 @@ protected:
 
 	UFUNCTION()
 	void ClickTile(float mouseX, float mouseY);
-
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

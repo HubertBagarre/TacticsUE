@@ -21,10 +21,17 @@ void ATileManager::SpawnTiles()
 		{
 			auto world = GetWorld();
 			ATile * tile = static_cast<ATile*>(world->SpawnActor(ATile::StaticClass()));
+
+			// TODO - wait for tile to finish spawning (probably use setTimer()) :c
+			
 			tilemap->Add(tile);
+			
 			tile->SpawnTile( x, y,spacing,world);
+			tile->TilePosition = FVector2D(x, y);
 		}
 	}
+
+	
 }
 
 // Called when the game starts or when spawned
@@ -52,6 +59,7 @@ void ATileManager::ClickTile(float mouseX, float mouseY)
 		UE_LOG(LogTemp, Log, TEXT("Tile %f %f"), tile->TilePosition.X, tile->TilePosition.Y);
 	}
 }
+
 
 // Called every frame
 void ATileManager::Tick(float DeltaTime)

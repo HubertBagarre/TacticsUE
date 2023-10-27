@@ -55,7 +55,4 @@ private:
 
 	bool bIsTouch; // Is it a touch device
 	float FollowTime; // For how long it has been pressed
-
-	UFUNCTION()
-	void Test(float x,float y);
 };

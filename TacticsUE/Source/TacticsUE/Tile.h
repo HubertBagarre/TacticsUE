@@ -16,6 +16,8 @@ public:
 	// Sets default values for this character's properties
 	ATile();
 	void SpawnTile(int x, int y,int sizeDecal,UWorld* world);
+
+	
 	FVector2d TilePosition;
 	
 protected:
