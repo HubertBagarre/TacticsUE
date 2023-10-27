@@ -16,12 +16,12 @@ public:
 	// Sets default values for this character's properties
 	ATile();
 	void SpawnTile(int x, int y,int sizeDecal,UWorld* world);
+	FVector2d TilePosition;
 	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	FVector2d TilePosition;
 	TArray<ATile*> *neighbours;
 	ACharacter* bpTile;
 

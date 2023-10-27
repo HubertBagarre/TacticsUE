@@ -3,6 +3,8 @@
 
 #include "TileManager.h"
 
+#include "BattlePlayerController.h"
+
 // Sets default values
 ATileManager::ATileManager()
 {
@@ -30,6 +32,25 @@ void ATileManager::BeginPlay()
 {
 	Super::BeginPlay();
 	SpawnTiles();
+
+	auto player = static_cast<ABattlePlayerController*>(GetWorld()->GetFirstPlayerController());
+	
+	player->OnLeftClick.AddDynamic(this, &ATileManager::ClickTile);
+
+	UE_LOG(LogTemp, Log, TEXT("Added event"));
+}
+
+void ATileManager::ClickTile(float mouseX, float mouseY)
+{
+	//raycast to tile
+	FVector2D mousePos(mouseX, mouseY);
+	FHitResult hitResult;
+	GetWorld()->GetFirstPlayerController()->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, hitResult);
+	if (hitResult.GetActor() != nullptr)
+	{
+		auto tile = static_cast<ATile*>(hitResult.GetActor());
+		UE_LOG(LogTemp, Log, TEXT("Tile %f %f"), tile->TilePosition.X, tile->TilePosition.Y);
+	}
 }
 
 // Called every frame

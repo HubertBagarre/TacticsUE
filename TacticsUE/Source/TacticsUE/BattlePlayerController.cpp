@@ -31,9 +31,9 @@ void ABattlePlayerController::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
-	OnLeftClick.AddDynamic(this, &ABattlePlayerController::Test);
+	//OnLeftClick.AddDynamic(this, &ABattlePlayerController::Test);
 
-	UE_LOG(LogTemp, Log, TEXT("Added truc"));
+	//UE_LOG(LogTemp, Log, TEXT("Added truc"));
 
 	//Add Input Mapping Context
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
@@ -44,12 +44,12 @@ void ABattlePlayerController::BeginPlay()
 
 void ABattlePlayerController::OnInputStarted()
 {
-	UE_LOG(LogTemp, Log, TEXT("Input started"));
+	//UE_LOG(LogTemp, Log, TEXT("Input started"));
 }
 
 void ABattlePlayerController::OnInputTriggered()
 {
-	UE_LOG(LogTemp, Log, TEXT("Input Triggered"));
+	//UE_LOG(LogTemp, Log, TEXT("Input Triggered"));
 }
 
 void ABattlePlayerController::OnInputReleased()
@@ -57,10 +57,10 @@ void ABattlePlayerController::OnInputReleased()
 	float mouseX;
 	float mouseY;
 	GetMousePosition(mouseX,mouseY);
-	UE_LOG(LogTemp, Log, TEXT("Mouse is %f %f"),mouseX,mouseY);
+	//UE_LOG(LogTemp, Log, TEXT("Mouse is %f %f"),mouseX,mouseY);
 
 	if(OnLeftClick.IsBound()) OnLeftClick.Broadcast(mouseX,mouseY);
 		
-	UE_LOG(LogTemp, Log, TEXT("Input Completed"));
+	//UE_LOG(LogTemp, Log, TEXT("Input Completed"));
 }
 
