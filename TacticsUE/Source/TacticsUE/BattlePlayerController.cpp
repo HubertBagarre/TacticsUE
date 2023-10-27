@@ -57,11 +57,10 @@ void ABattlePlayerController::OnInputReleased()
 	float mouseX;
 	float mouseY;
 	GetMousePosition(mouseX,mouseY);
-	OnLeftClick.Broadcast(mouseX,mouseY);
+	UE_LOG(LogTemp, Log, TEXT("Mouse is %f %f"),mouseX,mouseY);
+
+	if(OnLeftClick.IsBound()) OnLeftClick.Broadcast(mouseX,mouseY);
+		
 	UE_LOG(LogTemp, Log, TEXT("Input Completed"));
 }
 
-void ABattlePlayerController::Test(float x, float y)
-{
-	UE_LOG(LogTemp, Log, TEXT("Testting %f %f"),x,y);
-}
