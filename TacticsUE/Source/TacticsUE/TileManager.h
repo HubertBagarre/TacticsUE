@@ -16,26 +16,20 @@ public:
 	// Sets default values for this actor's properties
 	ATileManager();
 
-	void ConstructData();
+	UFUNCTION(BlueprintCallable)
+	void ConstructData(int x,int y);
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	UPROPERTY(EditAnywhere,BlueprintReadOnly)
-	int nbX = 10;
-	UPROPERTY(EditAnywhere,BlueprintReadOnly)
-	int nbY = 10;
-	UPROPERTY(EditAnywhere,BlueprintReadOnly)
-	int spacing = 170;
-
+	
 	TArray<TileData *> *tilemap;
 
 	void SetupCallbacks();
 	
 	UFUNCTION()
 	void ClickTile(float mouseX, float mouseY);
-	TileData* GetTileData(int x, int y);
+	TileData* GetTileData(int x, int y, int maxX);
 	TileData* GetTileData(int index);
 
 	UFUNCTION(BlueprintCallable)

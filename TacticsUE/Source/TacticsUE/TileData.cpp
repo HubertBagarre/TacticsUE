@@ -3,7 +3,7 @@
 
 #include "TileData.h"
 
-TileData::TileData(float x,float y)
+TileData::TileData(int x,int y)
 {
 	Position = FVector2D(x, y);
 	neighbours = new TArray<TileData *>();

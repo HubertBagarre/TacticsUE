@@ -10,7 +10,7 @@
 class TACTICSUE_API TileData
 {
 public:
-	TileData(float x,float y);
+	TileData(int x,int y);
 	~TileData();
 
 	FVector2D Position;

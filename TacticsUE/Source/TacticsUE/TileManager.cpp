@@ -10,43 +10,42 @@ ATileManager::ATileManager()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-void ATileManager::ConstructData()
+void ATileManager::ConstructData(int x, int y)
 {
-	//TileData::SetManager(this);
 	
 	tilemap = new TArray<TileData *>();
-	for (float y = 0; y < nbY; y++)
+	for (int i = 0; i < y; i++)
 	{
-		for (float x = 0; x < nbX; x++)
+		for (int j = 0; j < y; j++)
 		{
-			tilemap->Add(new TileData(x,y));
+			tilemap->Add(new TileData(i,j));
 		}
 	}
 
-	for (float y = 0; y < nbY; y++)
+	for (int i = 0; i < y; i++)
 	{
-		for (float x = 0; x < nbX; x++)
+		for (int j = 0; j < y; j++)
 		{
-			bool north = y + 1 < nbY;
-			bool east = x + 1 < nbX;
-			bool south = y - 1 >= 0;
-			bool west = x - 1 >= 0;
+			bool north = i + 1 < x;
+			bool east = j + 1 < y;
+			bool south = i - 1 >= 0;
+			bool west = j - 1 >= 0;
 			bool northEast = north && east;
 			bool southEast = south && east;
 			bool southWest = south && west;
 			bool northWest = north && west;
 
 			
-			TileData* northTile = north ? GetTileData(x,y): nullptr;
-			TileData* eastTile = east ? GetTileData(x,y): nullptr;
-			TileData* southTile = south ? GetTileData(x,y): nullptr;
-			TileData* westTile = west ? GetTileData(x,y): nullptr;
-			TileData* northEastTile = northEast ? GetTileData(x,y): nullptr;
-			TileData* southEastTile = southEast ? GetTileData(x,y): nullptr;
-			TileData* southWestTile = southWest ? GetTileData(x,y): nullptr;
-			TileData* northWestTile = northWest ? GetTileData(x,y): nullptr;
+			TileData* northTile = north ? GetTileData(j,i,x): nullptr;
+			TileData* eastTile = east ? GetTileData(j,i,x): nullptr;
+			TileData* southTile = south ? GetTileData(j,i,x): nullptr;
+			TileData* westTile = west ? GetTileData(j,i,x): nullptr;
+			TileData* northEastTile = northEast ? GetTileData(j,i,x): nullptr;
+			TileData* southEastTile = southEast ? GetTileData(j,i,x): nullptr;
+			TileData* southWestTile = southWest ? GetTileData(j,i,x): nullptr;
+			TileData* northWestTile = northWest ? GetTileData(j,i,x): nullptr;
 			
-			GetTileData(x,y)->SetNeighbours(northTile, eastTile, southTile, westTile, northEastTile, southEastTile, southWestTile, northWestTile);
+			GetTileData(j,i,x)->SetNeighbours(northTile, eastTile, southTile, westTile, northEastTile, southEastTile, southWestTile, northWestTile);
 		}
 	}
 }
@@ -56,8 +55,6 @@ void ATileManager::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	ConstructData();
-
 	SetupCallbacks();
 }
 
@@ -80,9 +77,9 @@ void ATileManager::ClickTile(float mouseX, float mouseY)
 	}*/
 }
 
-TileData* ATileManager::GetTileData(int x, int y)
+TileData* ATileManager::GetTileData(int x, int y, int maxX)
 {
-	return tilemap->GetData()[x + y * nbX];
+	return tilemap->GetData()[x + y * maxX];
 }
 
 TileData* ATileManager::GetTileData(int index)
